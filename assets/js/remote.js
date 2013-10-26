@@ -7,9 +7,13 @@ $( document ).ready(function() {
 
 
 		for (var i = 0; i < movement.length; i++) {
-			console.log(movement[i]);
-			if(movement[i] == message.message){
+			if(movement[i] == message.message && message.on){
 				$('#' + movement[i] ).button('toggle')
+			}
+			if(!message.on){
+				if ($('#' + movement[i] ).hasClass('active')){
+					$('#' + movement[i] ).button('toggle')
+				}
 			}
 		};
 

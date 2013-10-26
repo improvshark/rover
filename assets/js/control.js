@@ -28,7 +28,8 @@ var movement = ["forward", "backward", "left", "right"];
 for (var i = 0; i < movement.length; i++) {
 	console.log(movement[i]);
 	$('#' + movement[i] ).mousedown( down(movement[i]));
-	$('#' + movement[i] ).mouseup( up(movement[i]));
+	$(window ).mouseup( up(movement[i]));
 };
+
 
 
