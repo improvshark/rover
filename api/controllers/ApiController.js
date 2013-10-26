@@ -16,37 +16,53 @@
  */
 
 module.exports = {
-    
-  
-  index: function (req, res) {
-    var message = req.param('message');
-    var on = req.param('on');
-  
-    // Send a JSON response
-    var directions = ['forward', 'backward', 'left', 'right'];
-
-    for (var i = 0; i < directions.length; i++) {
-      if(message == directions[i] && on){
-        res.json({success: true, message: directions[i] + ' on received'});
-        sails.io.sockets.emit('trigger', { message: directions[i], on: on});
-      }
-      else if (message == directions[i] && !on){
-        res.json({success: true, message: directions[i] + ' off received'});
-        sails.io.sockets.emit('trigger', { message: directions[i], on: on});
-      }
-    }
 
 
-    
-
-  },
+	index: function(req, res) {
 
 
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to ApiController)
-   */
-  _config: {}
 
-  
+		if (req.isSocket) {
+			var message = req.param('message');
+			var on = req.param('on');
+
+			// Send a JSON response
+			var directions = ['forward', 'backward', 'left', 'right'];
+
+			for (var i = 0; i < directions.length; i++) {
+				if (message == directions[i] && on) {
+					res.json({
+						success: true,
+						message: directions[i] + ' on received'
+					});
+					sails.io.sockets.emit('trigger', {
+						message: directions[i],
+						on: on
+					});
+				}
+			}
+			if (!on) {
+				res.json({
+					success: true,
+					message: 'all' + ' off received'
+				});
+				sails.io.sockets.emit('trigger', {
+					message: 'all',
+					on: on
+				});
+			}
+		}
+
+
+
+	},
+
+
+	/**
+	 * Overrides for the settings in `config/controllers.js`
+	 * (specific to ApiController)
+	 */
+	_config: {}
+
+
 };
