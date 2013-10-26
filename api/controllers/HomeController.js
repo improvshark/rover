@@ -14,7 +14,7 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-
+var post = {};
 module.exports = {
     
   
@@ -26,7 +26,11 @@ module.exports = {
    index: function (req, res) {
     
     // Send a JSON response
-    return res.view("home/index");
+
+
+    post.active = 'home';
+
+    res.view("home/index", {post: post});
   },
 
 
@@ -36,7 +40,9 @@ module.exports = {
    */
    control: function (req, res) {
 
-    return res.view("home/remote")
+    post.active = 'control';
+
+    return res.view("home/control", {post: post})
   },
 
 
@@ -46,7 +52,9 @@ module.exports = {
    */
    remote: function (req, res) {
 
-    return res.view("home/remote")
+    post.active = 'remote';
+
+    return res.view("home/remote", {post: post})
   },
 
 

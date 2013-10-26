@@ -18,6 +18,20 @@
 module.exports = {
     
   
+  /**
+   * Action blueprints:
+   *    `/api/forwardon`
+   */
+   send: function (req, res) {
+    
+    // Send a JSON response
+    if(req.isJson){
+      
+    }
+    else{
+      return 0;
+    }
+  },
 
 
   /**
