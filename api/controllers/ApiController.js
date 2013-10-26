@@ -18,19 +18,27 @@
 module.exports = {
     
   
-  /**
-   * Action blueprints:
-   *    `/api/forwardon`
-   */
-   send: function (req, res) {
-    
+  index: function (req, res) {
+    var message = req.param('message');
+    var on = req.param('on');
+  
     // Send a JSON response
-    if(req.isJson){
-      
+    var directions = ['forward', 'backward', 'left', 'right'];
+
+    for (var i = 0; i < directions.length; i++) {
+      if(message == directions[i] && on){
+        res.json({success: true, message: directions[i] + ' on received'});
+        sails.io.sockets.emit('trigger', { message: directions[i], on: on});
+      }
+      else if (message == directions[i] && !on){
+        res.json({success: true, message: directions[i] + ' off received'});
+        sails.io.sockets.emit('trigger', { message: directions[i], on: on});
+      }
     }
-    else{
-      return 0;
-    }
+
+
+    
+
   },
 
 
