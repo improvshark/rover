@@ -14,6 +14,7 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
+var gpio = require("gpio");
 
 module.exports = {
 
