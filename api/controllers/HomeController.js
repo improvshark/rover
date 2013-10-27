@@ -14,57 +14,90 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
+
 var post = {};
 module.exports = {
-    
-  
-  /**
-   * Action blueprints:
-   *    `/home/index`
-   *    `/home`
-   */
-   index: function (req, res) {
-    
-    // Send a JSON response
 
 
-    post.active = 'home';
+	/**
+	 * Action blueprints:
+	 *    `/home/index`
+	 *    `/home`
+	 */
+	index: function(req, res) {
 
-    res.view("home/index", {post: post});
-  },
-
-
-  /**
-   * Action blueprints:
-   *    `/home/control`
-   */
-   control: function (req, res) {
-
-    post.active = 'control';
-
-    return res.view("home/control", {post: post})
-  },
+		// Send a JSON response
 
 
-  /**
-   * Action blueprints:
-   *    `/home/remote`
-   */
-   remote: function (req, res) {
+		post.active = 'home';
 
-    post.active = 'remote';
-
-    return res.view("home/remote", {post: post})
-  },
+		res.view("home/index", {
+			post: post
+		});
+	},
 
 
+	/**
+	 * Action blueprints:
+	 *    `/home/control`
+	 */
+	control: function(req, res) {
+
+		post.active = 'control';
+
+		return res.view("home/control", {
+			post: post
+		})
+	},
 
 
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to HomeController)
-   */
-  _config: {}
+	/**
+	 * Action blueprints:
+	 *    `/home/remote`
+	 */
+	remote: function(req, res) {
 
-  
+		post.active = 'remote';
+
+		return res.view("home/remote", {
+			post: post
+		})
+	},
+
+	cam: function(req, res) {
+
+
+		var Camelot = require('./camelot.js');
+
+		var camelot = new Camelot({
+			'rotate': '180',
+			'flip': 'v'
+		});
+
+		camelot.on('frame', function(image) {
+			console.log('frame received!');
+		});
+
+		camelot.on('error', function(err) {
+			console.log(err);
+		});
+
+		camelot.grab({
+			'title': 'Camelot',
+			'font': 'Arial:24',
+			'frequency': 1
+		});
+
+
+	},
+
+
+
+	/**
+	 * Overrides for the settings in `config/controllers.js`
+	 * (specific to HomeController)
+	 */
+	_config: {}
+
+
 };
