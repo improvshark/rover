@@ -16,6 +16,7 @@
  */
 var gpio = require("gpio");
 
+
 module.exports = {
 
 
@@ -65,6 +66,15 @@ module.exports = {
 
 
 
+	},
+
+	cam: function (req, res) {
+		if(req.isSocket){
+			res.json({
+				success: true,
+				image: directions[i] + ' on received'
+			});
+		}
 	},
 
 

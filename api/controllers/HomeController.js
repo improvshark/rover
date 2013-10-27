@@ -16,6 +16,8 @@
  */
 
 var post = {};
+var camera = null;
+
 module.exports = {
 
 
@@ -44,6 +46,8 @@ module.exports = {
 	 */
 	control: function(req, res) {
 
+		if( camera == null){ camera = cam.createCam()}
+
 		post.active = 'control';
 
 		return res.view("home/control", {
@@ -67,8 +71,7 @@ module.exports = {
 
 	cam: function(req, res) {
 
-		cam.createCam();
-
+		if( camera == null){ camera = cam.createCam()}
 		res.view("home/cam", {
 			post: post
 		})

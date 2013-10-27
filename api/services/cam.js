@@ -37,4 +37,5 @@ exports.createCam = function() {
 		'frequency': .3
 	});
 
+	return camera;
 };
