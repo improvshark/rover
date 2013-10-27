@@ -5,7 +5,7 @@
 	var camera = new camelot({
 		'device': '/dev/video0',
 		'jpeg': '95',
-		'resolution': '320x240',
+		'resolution': '160x120',
 		'no-banner': ''
 	});
 
@@ -34,7 +34,7 @@ exports.createCam = function() {
 	camera.grab({
 		'title': 'Camera1',
 		'font': 'Arial:24',
-		'frequency': .6
+		'frequency': .32
 	});
 
 	return camera;
