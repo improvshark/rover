@@ -51,6 +51,15 @@ module.exports = {
 					on: on
 				});
 			}
+			if(message == 'led'){				
+				res.json({
+					success: true,
+					message: message + 'received'
+				});
+				sails.io.sockets.emit('trigger', {
+					message: 'led'
+				});
+			}
 		}
 
 
