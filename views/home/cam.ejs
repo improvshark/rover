@@ -1,0 +1,19 @@
+<img src="" id="frame" style="width:400px; height:300px"/>
+<div id="log"></div>
+
+
+<script type="text/javascript" >
+
+var img;
+
+$(document).ready(function() {
+
+	img = document.getElementById("frame");
+	socket.on('frame', function messageReceived(data) {
+		//console.log('New comet message received :: ', data);
+        img.src="data:image/jpeg;base64, " + data.imagedata;
+        
+	});
+
+});
+</script>

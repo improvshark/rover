@@ -35,3 +35,17 @@ for (var i = 0; i < movement.length; i++) {
 	$('#' + movement[i]).mousedown(down(movement[i]));
 
 };
+
+
+var img;
+
+$(document).ready(function() {
+
+	img = document.getElementById("frame");
+	socket.on('frame', function messageReceived(data) {
+		//console.log('New comet message received :: ', data);
+        img.src="data:image/jpeg;base64, " + data.imagedata;
+        
+	});
+
+});

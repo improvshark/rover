@@ -15,6 +15,8 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+
+
 var post = {};
 module.exports = {
 
@@ -66,28 +68,11 @@ module.exports = {
 
 	cam: function(req, res) {
 
+		cam.createCam();
 
-		var Camelot = require('./camelot.js');
-
-		var camelot = new Camelot({
-			'rotate': '180',
-			'flip': 'v'
-		});
-
-		camelot.on('frame', function(image) {
-			console.log('frame received!');
-		});
-
-		camelot.on('error', function(err) {
-			console.log(err);
-		});
-
-		camelot.grab({
-			'title': 'Camelot',
-			'font': 'Arial:24',
-			'frequency': 1
-		});
-
+		res.view("home/cam", {
+			post: post
+		})
 
 	},
 
