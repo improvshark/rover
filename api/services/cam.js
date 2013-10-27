@@ -34,7 +34,7 @@ exports.createCam = function() {
 	camera.grab({
 		'title': 'Camera1',
 		'font': 'Arial:24',
-		'frequency': .3
+		'frequency': .6
 	});
 
 	return camera;
