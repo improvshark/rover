@@ -15,8 +15,6 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-
-
 var post = {};
 module.exports = {
 
@@ -32,6 +30,7 @@ module.exports = {
 
 
 		post.active = 'home';
+		post.ip = myLib.getIPAddresses();
 
 		res.view("home/index", {
 			post: post
