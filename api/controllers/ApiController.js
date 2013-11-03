@@ -14,14 +14,14 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-var gpio = require("gpio");
+
 
 
 module.exports = {
 
 
 	index: function(req, res) {
-
+		myLib.pi.initGpio();
 
 
 		if (req.isSocket) {
@@ -53,7 +53,33 @@ module.exports = {
 					on: on
 				});
 			}
-			if(message == 'led'){				
+
+
+			console.log('message:' + message + ' on:'+ on);
+
+			
+			switch(message){
+				case "forward":
+					myLib.pi.forward(on);
+					break;
+				case "backward":
+					myLib.pi.backward(on);
+					break;
+				case "left":
+					break;
+				case "right":
+					break;
+				case "allOff":
+					myLib.pi.allOff();
+
+					break;
+			}
+
+
+
+
+			if(message == 'led'){	
+				myLib.pi.led();			
 				res.json({
 					success: true,
 					message: message + 'received'
@@ -78,6 +104,7 @@ module.exports = {
 	},
 
 
+
 	/**
 	 * Overrides for the settings in `config/controllers.js`
 	 * (specific to ApiController)
@@ -86,3 +113,5 @@ module.exports = {
 
 
 };
+
+

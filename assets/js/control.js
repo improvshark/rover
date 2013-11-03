@@ -29,10 +29,12 @@ function up(argument) {
 }
 
 var movement = ["forward", "backward", "left", "right", 'led'];
-$(window).mouseup(up('none'));
+//$(window).mouseup(up('none'));
+
 for (var i = 0; i < movement.length; i++) {
 	//console.log(movement[i]);
 	$('#' + movement[i]).mousedown(down(movement[i]));
+	$('#' + movement[i]).mouseup(up(movement[i]));
 
 };
 

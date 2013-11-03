@@ -46,7 +46,7 @@ module.exports = {
 	 */
 	control: function(req, res) {
 
-		if( camera == null){ camera = cam.createCam()}
+		//if( camera == null){ camera = cam.createCam()}
 
 		post.active = 'control';
 
