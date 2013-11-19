@@ -38,6 +38,52 @@ for (var i = 0; i < movement.length; i++) {
 
 };
 
+$(document).keydown(function(evt) {
+
+	console.log('key up : ' + evt.which);
+	switch (evt.which) {
+		case 37: // left
+			evt.preventDefault();
+			down("left")();
+			break;
+		case 38: // up
+			evt.preventDefault();
+			down("forward")();
+			break;
+		case 39: // right
+			evt.preventDefault();
+			down("right")();
+			break;
+		case 40: // down
+			evt.preventDefault();
+			down("backward")();
+			break;
+	}
+});
+
+
+$(document).keyup(function(evt) {
+
+	console.log('key up : ' + evt.which);
+	switch (evt.which) {
+		case 37: // left
+			evt.preventDefault();
+			up("left")();
+			break;
+		case 38: // up
+			evt.preventDefault();
+			up("forward")();
+			break;
+		case 39: // right
+			evt.preventDefault();
+			up("right")();
+			break;
+		case 40: // down
+			evt.preventDefault();
+			up("backward")();
+			break;
+	}
+});
 
 var img;
 
@@ -46,8 +92,8 @@ $(document).ready(function() {
 	img = document.getElementById("frame");
 	socket.on('frame', function messageReceived(data) {
 		//console.log('New comet message received :: ', data);
-        img.src="data:image/jpeg;base64, " + data.imagedata;
-        
+		img.src = "data:image/jpeg;base64, " + data.imagedata;
+
 	});
 
 });
