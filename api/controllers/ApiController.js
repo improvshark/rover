@@ -60,17 +60,18 @@ module.exports = {
 			
 			switch(message){
 				case "forward":
-					myLib.pi.forward(on);
+					myLib.pi.motor1.forward(on);							
+					myLib.pi.motor2.forward(on);							
 					break;
 				case "backward":
-					myLib.pi.backward(on);
+					myLib.pi.motor1.backward(on);
+					myLib.pi.motor2.backward(on);
 					break;
 				case "left":
 					break;
 				case "right":
 					break;
 				case "allOff":
-					myLib.pi.allOff();
 
 					break;
 			}
