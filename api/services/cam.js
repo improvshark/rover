@@ -4,8 +4,8 @@
 
 	var camera = new camelot({
 		'device': '/dev/video0',
-		'jpeg': '95',
-		'resolution': '160x120',
+		'jpeg': '50',
+		'resolution': '140x100',
 		'no-banner': ''
 	});
 

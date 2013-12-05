@@ -117,7 +117,7 @@ module.exports.sockets = {
         // to report an error, call `cb(err)`
     }
   */
-  authorization: true,
+  authorization: false,
 
   // Match string representing the origins that are allowed to connect to the Socket.IO server
   origins: '*:*',

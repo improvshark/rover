@@ -23,6 +23,30 @@ module.exports = {
 	index: function(req, res) {
 		myLib.pi.initGpio();
 
+		sails.io.sockets.on('command', function(data) {
+			console.log("received emit!!!!!");
+			console.log(data);
+
+
+			switch (data.command) {
+				case "f":
+					myLib.pi.motor1.forward(data.on);
+					break;
+				case "b":
+					myLib.pi.motor1.backward(data.on);
+					break;
+				case "l":
+					myLib.pi.motor2.forward(data.on);
+					break;
+				case "r":
+					myLib.pi.motor2.backward(data.on);
+					break;
+				case "a":
+
+					break;
+			}
+		});
+
 
 		if (req.isSocket) {
 			var message = req.param('message');
@@ -55,12 +79,12 @@ module.exports = {
 			}
 
 
-			console.log('message:' + message + ' on:'+ on);
+			console.log('message:' + message + ' on:' + on);
 
-			
-			switch(message){
+
+			switch (message) {
 				case "forward":
-					myLib.pi.motor1.forward(on);														
+					myLib.pi.motor1.forward(on);
 					break;
 				case "backward":
 					myLib.pi.motor1.backward(on);
@@ -78,9 +102,8 @@ module.exports = {
 
 
 
-
-			if(message == 'led'){	
-				myLib.pi.led();			
+			if (message == 'led') {
+				myLib.pi.led();
 				res.json({
 					success: true,
 					message: message + 'received'
@@ -95,15 +118,66 @@ module.exports = {
 
 	},
 
-	cam: function (req, res) {
-		if(req.isSocket){
-			res.json({
-				success: true,
-				image: directions[i] + ' on received'
-			});
+	// cam: function(req, res) {
+	// 	if (req.isSocket) {
+	// 		res.json({
+	// 			success: true,
+	// 			image: directions[i] + ' on received'
+	// 		});
+	// 	}
+	// },
+
+	post: function(req, res) {
+
+
+		myLib.pi.initGpio();
+
+		console.log("got something!");
+		var command = req.param('direction');
+		
+		if (req.param('on') == "true") {
+			var on = true;
+		} else {
+			var on = false;
 		}
+
+		console.log(command);
+		console.log(on);
+
+		switch (command) {
+			case "f":
+				myLib.pi.motor1.forward(on);
+				break;
+			case "b":
+				myLib.pi.motor1.backward(on);
+				break;
+			case "l":
+				myLib.pi.motor2.forward(on);
+				break;
+			case "r":
+				myLib.pi.motor2.backward(on);
+				break;
+			case "allOff":
+
+				break;
+		}
+
+
+		res.send();
+
 	},
 
+	test: function(req, res) {
+		sails.io.sockets.emit('message', {
+			message: 'led'
+		});
+
+		res.json({
+			success: true,
+			message: directions[i] + ' on received'
+		});
+
+	},
 
 
 	/**
@@ -114,5 +188,3 @@ module.exports = {
 
 
 };
-
-

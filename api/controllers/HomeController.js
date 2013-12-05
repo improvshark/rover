@@ -27,6 +27,14 @@ module.exports = {
 	 *    `/home`
 	 */
 	index: function(req, res) {
+	// cam: function(req, res) {
+	// 	if (req.isSocket) {
+	// 		res.json({
+	// 			success: true,
+	// 			image: directions[i] + ' on received'
+	// 		});
+	// 	}
+	// },
 
 		// Send a JSON response
 
@@ -55,6 +63,17 @@ module.exports = {
 		})
 	},
 
+	control2: function(req, res) {
+
+		//if( camera == null){ camera = cam.createCam()}
+
+		post.active = 'control';
+
+		return res.view("home/control2", {
+			post: post
+		})
+	},
+
 
 	/**
 	 * Action blueprints:
@@ -75,8 +94,16 @@ module.exports = {
 		res.view("home/cam", {
 			post: post
 		})
-
 	},
+	image: function(req, res) {
+
+		if( camera == null){ camera = cam.createCam()}
+			var fs = require('fs');
+			var img = fs.readFileSync('./true');
+			res.writeHead(200, {'Content-Type': 'image/jpg' });
+			res.end(img, 'binary');
+	},
+
 
 
 
